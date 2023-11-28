@@ -1,19 +1,12 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 const lineWidth = document.getElementById("line-width");
+const color = document.getElementById("color");
+const colorOption = Array.from(document.getElementsByClassName(color-option));
 canvas.width = 800;
 canvas.height = 800;
 ctx.lineWidth = lineWidth.value;
 
-const colors = [
-  "#ff3838",
-  "#ffb8b8",
-  "#c56cf0",
-  "#ff9f1a",
-  "#fff200",
-  "#32ff7e",
-  "#7efff5",
-];
 
 let isPainting = false;
 
@@ -35,6 +28,10 @@ function cancelPainting(event) {
 function onLineWidthChange(event) {
     ctx.lineWidth = event.target.value;
 }
+function onColorChange(event) {
+    ctx.strokeStyle = event.target.value;
+    ctx.fillStyle = event.target.value;
+}
 
 
 canvas.addEventListener("mousemove", onMove);
@@ -43,3 +40,6 @@ canvas.addEventListener("mouseup", cancelPainting);
 canvas.addEventListener("mouseleave",cancelPainting)
 
 lineWidth.addEventListener("change", onLineWidthChange);
+color.addEventListener("change", onColorChange);
+
+colorOption.forEach(color => color.addEventListener("click", onColorClick));
